@@ -1,14 +1,15 @@
-# Locuss AI Chat
+# LOCUSS AI Chat
 
 A small full-stack AI chat app built for the Lyftr assignment. It uses React and Vite in the browser, FastAPI and LiteLLM in the backend, and SQLite for session history. Each page load gets a fresh session ID. The optional system prompt is remembered for that session.
 
 ## 1. Live URLs
 
-- Frontend:(https://locuss.up.railway.app/). Local URL: http://localhost:3000
-- Backend: (https://bot-backend.up.railway.app). Local URL: http://localhost:8000
-- Public repository: not published yet
+- Frontend: [https://locuss.up.railway.app](https://locuss.up.railway.app)
+- Backend: [https://bot-backend.up.railway.app](https://bot-backend.up.railway.app)
+- Backend health: [https://bot-backend.up.railway.app/health](https://bot-backend.up.railway.app/health)
+- Public repository: [https://github.com/Abhinav23356/Chat-bot](https://github.com/Abhinav23356/Chat-bot)
 
-The local application is ready to run. A live deployment and public repository require a configured hosting/GitHub account and two provider API keys; no credentials or destination were supplied with the assignment. The frontend is built with `VITE_API_BASE_URL` set at image build time, so configure it to the public backend URL when deploying.
+The backend is deployed on Railway with SQLite stored on a persistent volume mounted at `/data`. The frontend is deployed as a separate Railway service from the same repository. Railway's Free plan may sleep services when idle and the first request after sleep can take longer.
 
 ## 2. Run locally: with Docker and without
 
