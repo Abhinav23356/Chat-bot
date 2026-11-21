@@ -1,11 +1,11 @@
-# Lyftr AI Chat
+# Locuss AI Chat
 
 A small full-stack AI chat app built for the Lyftr assignment. It uses React and Vite in the browser, FastAPI and LiteLLM in the backend, and SQLite for session history. Each page load gets a fresh session ID. The optional system prompt is remembered for that session.
 
 ## 1. Live URLs
 
-- Frontend: not deployed yet. Local URL: http://localhost:3000
-- Backend: not deployed yet. Local URL: http://localhost:8000
+- Frontend:(https://locuss.up.railway.app/). Local URL: http://localhost:3000
+- Backend: (https://bot-backend.up.railway.app). Local URL: http://localhost:8000
 - Public repository: not published yet
 
 The local application is ready to run. A live deployment and public repository require a configured hosting/GitHub account and two provider API keys; no credentials or destination were supplied with the assignment. The frontend is built with `VITE_API_BASE_URL` set at image build time, so configure it to the public backend URL when deploying.
@@ -45,31 +45,3 @@ The local application is ready to run. A live deployment and public repository r
 - **Tokens:** each assistant card shows that request's input and output token counts, along with its source, model, and latency. Values are stored per assistant response, not summed across the chat.
 - The backend test suite is in `backend/tests/`; run it from `backend/` with `pytest` after installing the development dependencies with `pip install -r requirements-dev.txt`.
 
-## 5. Setup Used: your editor and AI tools
-
-Built in Codex with an AI coding assistant. The app uses a standard Vite/React frontend and FastAPI/LiteLLM backend.
-
-## 6. Bonus features (if any): what you added beyond the requirements and why
-
-- Optional system prompt editor, persisted per session.
-- In-app failover toggle that sends the assignment's simulation header, making the key fallback easy to demonstrate.
-- Session identifier and backend connection status in the interface.
-- Suggested starter prompts and responsive layout.
-
-## Deployment notes: free Railway plan with SQLite
-
-The backend can keep using SQLite; Railway provides one persistent 0.5 GB volume on its $0 Free plan. The plan includes $1 of usage each month and does not require a credit card. Services sleep after 5–10 minutes idle, so the first request may be slower; if the monthly usage credit is exhausted, services stop until the next billing cycle. See [Railway Free plan](https://docs.railway.com/pricing/free-plan).
-
-1. Push this repository to GitHub, then create a Railway project from that repository. Create a backend service with root directory `/backend`; Railway will build `backend/Dockerfile`.
-2. In the backend service, add a volume mounted at `/data`.
-3. Set these backend variables in Railway (put real provider keys in the dashboard, never in Git):
-   - `LLM_API_KEYS`: comma-separated provider API keys
-   - `LLM_MODEL=gemini/gemini-3.5-flash-lite`
-   - `DATABASE_URL=sqlite:////data/app.db`
-   - `ENABLE_FAILURE_SIMULATION=true`
-   - `ALLOWED_ORIGINS`: the deployed frontend origin
-   - `RAILWAY_RUN_UID=0`: needed because Railway mounts volumes as root and the container otherwise runs as `appuser`
-4. Generate a Railway public domain for the backend. The container reads Railway's `PORT` automatically; confirm the service at `https://<backend-domain>/health`.
-5. Deploy `frontend/` to a static host such as Cloudflare Pages. Set `VITE_API_BASE_URL=https://<backend-domain>` at build time. Then set the backend's `ALLOWED_ORIGINS` to the resulting frontend origin and redeploy the backend.
-
-SQLite remains persistent only when the database file is under `/data`. Railway's Free allowance is usage-based, not guaranteed always-on hosting. Keep one backend worker so the in-memory LiteLLM cache is shared for demo requests. See [Railway volume docs](https://docs.railway.com/volumes) for mount behavior and permissions.
