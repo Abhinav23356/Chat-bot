@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="app-shell">
       <aside className="rail">
-        <a className="brand-mark" href="#home" aria-label="Lyftr AI home"><span className="brand-glyph">L</span></a>
+        <a className="brand-mark" href="#home" aria-label="Locuss AI home"><span className="brand-glyph">L</span></a>
         <div className="rail-divider" />
         <button className="rail-button active" title="Chat" aria-label="Chat"><span className="chat-icon" /></button>
         <button className="rail-button muted" title="History" aria-label="History"><span className="history-icon">◷</span></button>
@@ -89,7 +89,7 @@ function App() {
 
         <section className="workspace">
           <div className="conversation-head">
-            <div className="eyebrow"><span className="eyebrow-dot" />LYFTR AI <span className="eyebrow-divider">·</span> CHAT</div>
+            <div className="eyebrow"><span className="eyebrow-dot" />LOCUSS AI <span className="eyebrow-divider">·</span> CHAT</div>
             <h1>Good ideas start<br className="mobile-break" /> <span>somewhere.</span></h1>
             <p className="subtitle">A little context goes a long way. What’s on your mind?</p>
             <div className="session-chip"><span className="session-chip-icon">◉</span><span>SESSION</span><code>{sessionId.slice(0, 12)}…</code></div>
@@ -111,7 +111,7 @@ function App() {
                 ) : (
                   <article className="assistant-message" data-testid="assistant-message" key={item.id}>
                     <div className="assistant-avatar"><span>L</span></div>
-                    <div className="assistant-content"><div className="assistant-label">LYFTR <span>·</span> ASSISTANT</div><div className="reply-text"><ReactMarkdown>{item.content}</ReactMarkdown></div>
+                    <div className="assistant-content"><div className="assistant-label">LOCUSS <span>·</span> ASSISTANT</div><div className="reply-text"><ReactMarkdown>{item.content}</ReactMarkdown></div>
                       <div className="metadata-row">
                         <span className={`meta-pill source-${item.metadata?.resolution_source === 'LLM_CACHE' ? 'cache' : 'live'}`}><span className="meta-dot" /><span data-testid="meta-source">{item.metadata?.resolution_source}</span></span>
                         <span className="meta-pill model-pill"><span className="meta-label">MODEL</span><span data-testid="meta-model">{item.metadata?.model}</span></span>
@@ -143,7 +143,7 @@ function App() {
           </div>
         </section>
 
-        <footer className="footer"><span>LYFTR <span className="footer-slash">/</span> FULL STACK ASSIGNMENT</span><span>BUILT FOR BETTER CONVERSATIONS <span className="footer-sparkle">✳</span></span></footer>
+        <footer className="footer"><span>LOCUSS <span className="footer-slash">/</span> AI CHAT</span><span>BUILT FOR BETTER CONVERSATIONS <span className="footer-sparkle">✳</span></span></footer>
       </main>
     </div>
   );
