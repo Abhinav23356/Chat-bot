@@ -1,5 +1,7 @@
 # LOCUSS AI Chat
 
+https://github.com/Abhinav23356/Chat-bot/releases/download/demo/Screen.Recording.2026-11-21.at.11.04.47.PM.mp4
+
 A small full-stack AI chat app built for the Lyftr assignment. It uses React and Vite in the browser, FastAPI and LiteLLM in the backend, and SQLite for session history. Each page load gets a fresh session ID. The optional system prompt is remembered for that session.
 
 ## 1. Live URLs
