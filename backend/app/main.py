@@ -201,15 +201,25 @@ def provider_reply(messages: list[dict[str, str]], failures: dict[str, int]) -> 
         except HTTPException:
             raise
         except Exception as exc:
-            # Keep provider diagnostics useful while never writing credentials or full prompts to logs.
+            # Keep provider diagnostics useful without logging credentials or full prompts.
+            error_detail = getattr(exc, "message", None) or str(exc)
+            error_detail = " ".join(str(error_detail).split())
+            error_detail = re.sub(r"AIza[0-9A-Za-z_-]{20,}", "[REDACTED]", error_detail)
+            error_detail = re.sub(
+                r"(?i)(api[_-]?key|authorization|bearer)\s*[:=]\s*[^,\s]+",
+                r"\1=[REDACTED]",
+                error_detail,
+            )[:500]
             frames = traceback.extract_tb(exc.__traceback__)
             location = frames[-1] if frames else None
             logger.warning(
-                "provider call failed key_id=%s model=%s error_type=%s status=%s at=%s:%s function=%s",
+                "provider call failed key_id=%s model=%s provider=%s error_type=%s status=%s message=%s at=%s:%s function=%s",
                 key_id,
                 MODEL,
+                getattr(exc, "llm_provider", "unknown"),
                 type(exc).__name__,
                 getattr(exc, "status_code", None),
+                error_detail,
                 location.filename.rsplit("/", 1)[-1] if location else "unknown",
                 location.lineno if location else "unknown",
                 location.name if location else "unknown",
